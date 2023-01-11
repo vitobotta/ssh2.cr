@@ -204,7 +204,7 @@ class SSH2::Session
   def hashkey(type : LibSSH2::HashType = LibSSH2::HashType::SHA1)
     handle = LibSSH2.hostkey_hash(self, type)
     return "" unless handle
-    slice = Slice.new(handle, type == LibSSH2::HashType::SHA1 ? 20 : 16)
+    slice = Slice.new(handle, type == LibSSH2::HashType::SHA1 ? 32 : 16)
     String.build do |o|
       slice.each_with_index do |b, idx|
         o << b.to_s(16)
